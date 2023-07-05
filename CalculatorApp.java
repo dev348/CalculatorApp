@@ -51,11 +51,17 @@ public class CalculatorApp {
         String operation = scanner.nextLine();
 
         // Get the operands from the user
-        System.out.print("Enter the first number: ");
-        double num1 = scanner.nextDouble();
+        double num1, num2;
+        try {
+            System.out.print("Enter the first number: ");
+            num1 = scanner.nextDouble();
 
-        System.out.print("Enter the second number: ");
-        double num2 = scanner.nextDouble();
+            System.out.print("Enter the second number: ");
+            num2 = scanner.nextDouble();
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter valid numbers.");
+            return;
+        }
 
         // Create an instance of the appropriate Calculator based on the operation
         Calculator calculator;
@@ -78,7 +84,14 @@ public class CalculatorApp {
         }
 
         // Perform the calculation using the selected calculator
-        double result = calculator.performOperation(num1, num2);
+        double result;
+        try {
+            result = calculator.performOperation(num1, num2);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+            return;
+        }
+
         System.out.println("Result: " + result);
     }
 }
